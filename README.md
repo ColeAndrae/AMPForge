@@ -2,7 +2,7 @@
 
 # AMPForge - Antimicrobial Peptide Generator
 
-AMPForge is an AI-powered web application that generates novel antimicrobial peptide (AMP) sequences and predicts their 3D structures. The application uses a Variational Autoencoder (VAE) to create new peptide sequences and the ESMFold model to predict their structural conformation.
+AMPForge is an AI-powered web application that generates novel antimicrobial peptide (AMP) sequences and predicts their 3D structures. The application uses a Variational Autoencoder (VAE) to create new peptide sequences and the ESMFold model to predict their structural conformation. AMPForge was trained using the DBAASP dataset, on over 14,000 different peptide sequences of varying functionality.
 
 ## Features
 
@@ -12,6 +12,9 @@ AMPForge is an AI-powered web application that generates novel antimicrobial pep
 * **Real-time Metrics**: Instantly view key properties of the generated peptide, such as length, net charge, and hydrophobicity.
 
 ---
+
+<img width="718" height="482" alt="image" src="https://github.com/user-attachments/assets/f6a765c9-9c1f-499a-8a5c-ceaad85dc77c" />
+
 
 ## Technologies Used
 
