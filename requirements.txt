@@ -1,0 +1,5 @@
+streamlit
+torch
+requests
+py3Dmol
+stmol
