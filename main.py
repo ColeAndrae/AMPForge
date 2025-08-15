@@ -183,7 +183,7 @@ def create_3d_visualization(pdb_string):
     """Create 3D molecular visualization"""
     view = py3Dmol.view(width=800, height=600)
     view.addModel(pdb_string, "pdb")
-    view.setStyle({"cartoon": {"color": "white"}})
+    view.setStyle({"cartoon": {"color": "spectrum"}})
     view.setBackgroundColor("#0e1117")
     view.zoomTo()
     return view
