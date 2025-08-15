@@ -74,11 +74,10 @@ st.markdown("""
         color: #000000;
     }
     
-    /* Center buttons */
     .stButton {
         display: flex;
         justify-content: center;
-        width: 100%;
+        width: 300%;
     }
 </style>
 """, unsafe_allow_html=True)
