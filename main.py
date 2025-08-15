@@ -274,7 +274,9 @@ def main():
         if st.session_state.pdb_structure:
             st.markdown("#### Interactive 3D Visualization")
             view = create_3d_visualization(st.session_state.pdb_structure)
-            showmol(view, height=600, width=800)
+            col1, col2, col3 = st.columns([1, 1, 1])
+            with col2:
+                showmol(view, height=600, width=800)
 
         elif st.session_state.pdb_structure is not None:
             st.error("Unable to generate 3D structure. Please try again.")
