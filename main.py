@@ -62,7 +62,9 @@ st.markdown("""
         font-size: 1.1rem;
         font-weight: 600;
         transition: all 0.3s ease;
-        width: 100%;
+        width: 300px;
+        margin: 0 auto;
+        display: block;
     }
     
     .stButton > button:hover {
@@ -73,9 +75,10 @@ st.markdown("""
     }
     
     /* Center buttons */
-    div[data-testid="column"]:has(.stButton) {
+    .stButton {
         display: flex;
         justify-content: center;
+        width: 100%;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -203,13 +206,11 @@ def main():
         st.session_state.pdb_structure = None
 
     model = load_model()
-
-    col1, col2, col3 = st.columns([1, 1, 1])
-    with col2:
-        if st.button("Generate New AMP Sequence", key="generate_btn"):
-            with st.spinner("Generating novel antimicrobial peptide..."):
-                st.session_state.sequence = generate_sequence(model)
-                st.session_state.pdb_structure = None
+    
+    if st.button("Generate New AMP Sequence", key="generate_btn"):
+        with st.spinner("Generating novel antimicrobial peptide..."):
+            st.session_state.sequence = generate_sequence(model)
+            st.session_state.pdb_structure = None
 
     if st.session_state.sequence:
         st.markdown("---")
@@ -263,12 +264,10 @@ def main():
 
         st.markdown("### 3D Structure Prediction")
 
-        col1, col2, col3 = st.columns([1, 1, 1])
-        with col2:
-            if st.button("Generate 3D Structure", key="structure_btn"):
-                with st.spinner("Predicting 3D structure with ESMFold..."):
-                    st.session_state.pdb_structure = get_protein_structure(
-                        st.session_state.sequence)
+        if st.button("Generate 3D Structure", key="structure_btn"):
+            with st.spinner("Predicting 3D structure with ESMFold..."):
+                st.session_state.pdb_structure = get_protein_structure(
+                    st.session_state.sequence)
 
         if st.session_state.pdb_structure:
             st.markdown("#### Interactive 3D Visualization")
