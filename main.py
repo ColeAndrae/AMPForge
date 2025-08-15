@@ -63,6 +63,7 @@ st.markdown("""
         font-weight: 600;
         transition: all 0.3s ease;
         width: 300%;
+        margin: 0 auto;
     }
     
     .stButton > button:hover {
