@@ -62,7 +62,7 @@ st.markdown("""
         font-size: 1.1rem;
         font-weight: 600;
         transition: all 0.3s ease;
-        width: 100%;
+        width: 300%;
         margin: 0 auto;
     }
     
@@ -71,6 +71,7 @@ st.markdown("""
         box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
         background: linear-gradient(45deg, #cccccc, #888888);
         color: #000000;
+        margin: 0 auto;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -205,14 +206,25 @@ def main():
 
     model = load_model()
 
-    col1, col2, col3 = st.columns([1, 2, 1])
+    # New code to center the button
+    st.markdown("""
+        <style>
+            .centered-button-container {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 2rem;
+            }
+        </style>
+    """, unsafe_allow_html=True)
 
-    with col2:
-
+    with st.container():
+        st.markdown('<div class="centered-button-container">', unsafe_allow_html=True)
         if st.button("Generate New AMP Sequence", key="generate_btn"):
             with st.spinner("Generating novel antimicrobial peptide..."):
                 st.session_state.sequence = generate_sequence(model)
                 st.session_state.pdb_structure = None
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     if st.session_state.sequence:
         st.markdown("---")
@@ -266,24 +278,23 @@ def main():
 
         st.markdown("### 3D Structure Prediction")
 
-        col1, col2, col3 = st.columns([1, 2, 1])
-        with col2:
-            if st.button("Generate 3D Structure", key="structure_btn"):
-                with st.spinner("Predicting 3D structure with ESMFold..."):
-                    st.session_state.pdb_structure = get_protein_structure(
-                        st.session_state.sequence)
+        st.markdown('<div class="centered-button-container">', unsafe_allow_html=True)
+        if st.button("Generate 3D Structure", key="structure_btn"):
+            with st.spinner("Predicting 3D structure with ESMFold..."):
+                st.session_state.pdb_structure = get_protein_structure(
+                    st.session_state.sequence)
+        st.markdown('</div>', unsafe_allow_html=True)
 
         if st.session_state.pdb_structure:
             st.markdown("#### Interactive 3D Visualization")
-
+            
             vis_col1, vis_col2, vis_col3 = st.columns([1, 2, 1])
             with vis_col2:
                 view = create_3d_visualization(st.session_state.pdb_structure)
                 showmol(view, height=600, width=800)
 
         elif st.session_state.pdb_structure is not None:
-            st.markdown(
-                f'<p style="color: #ffffff; text-align: center;">Unable to generate 3D structure. Please try again.</p>', unsafe_allow_html=True)
+            st.markdown(f'<p style="color: #ffffff; text-align: center;">Unable to generate 3D structure. Please try again.</p>', unsafe_allow_html=True)
 
     else:
 
