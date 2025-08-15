@@ -187,8 +187,8 @@ def create_3d_visualization(pdb_string):
     view.addModel(pdb_string, "pdb")
     view.setStyle({"cartoon": {"color": "spectrum"}})
     view.setBackgroundColor("#0e1117")
-    view.center()
     view.zoomTo()
+    view.center({'model': 0})
     return view
 
 # Main App
