@@ -77,7 +77,7 @@ st.markdown("""
     .stButton {
         display: flex;
         justify-content: center;
-        width: 300%;
+        width: 100%;
     }
 </style>
 """, unsafe_allow_html=True)
