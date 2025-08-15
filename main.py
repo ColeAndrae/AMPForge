@@ -63,7 +63,6 @@ st.markdown("""
         font-weight: 600;
         transition: all 0.3s ease;
         width: 300%;
-        margin: 0 auto;
     }
     
     .stButton > button:hover {
@@ -71,7 +70,6 @@ st.markdown("""
         box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
         background: linear-gradient(45deg, #cccccc, #888888);
         color: #000000;
-        margin: 0 auto;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -85,6 +83,7 @@ AMINO_ACIDS_REV = {
 }
 
 # Creating VariationalAutoEncoder:
+
 
 class VariationalAutoEncoder(nn.Module):
     def __init__(self, input_dim=1050, h_dim=100, z_dim=10):
@@ -123,6 +122,7 @@ class VariationalAutoEncoder(nn.Module):
 
 # Loading Model:
 
+
 @st.cache_resource
 def load_model():
     """Load the pre-trained VAE model"""
@@ -142,6 +142,7 @@ def load_model():
         return None
 
 # Sequence Generation:
+
 
 def generate_sequence(model):
     """Generate a new AMP sequence using the VAE"""
@@ -164,6 +165,7 @@ def generate_sequence(model):
 
 # Sequence Visualization:
 
+
 def get_protein_structure(sequence):
     """Get PDB structure from ESMAtlas API"""
     try:
@@ -176,6 +178,7 @@ def get_protein_structure(sequence):
     except:
         return None
 
+
 def create_3d_visualization(pdb_string):
     """Create 3D molecular visualization"""
     view = py3Dmol.view(width=800, height=600)
@@ -186,6 +189,7 @@ def create_3d_visualization(pdb_string):
     return view
 
 # Main App
+
 
 def main():
 
@@ -200,23 +204,14 @@ def main():
 
     model = load_model()
 
-    st.markdown("""
-        <style>
-            .centered-button-container {
-                display: flex;
-                justify-content: center;
-                margin-bottom: 2rem;
-            }
-        </style>
-    """, unsafe_allow_html=True)
+    col1, col2, col3 = st.columns([1, 2, 1])
 
-    with st.container():
-        st.markdown('<div class="centered-button-container">', unsafe_allow_html=True)
+    with col2:
+
         if st.button("Generate New AMP Sequence", key="generate_btn"):
             with st.spinner("Generating novel antimicrobial peptide..."):
                 st.session_state.sequence = generate_sequence(model)
                 st.session_state.pdb_structure = None
-        st.markdown('</div>', unsafe_allow_html=True)
 
     if st.session_state.sequence:
         st.markdown("---")
@@ -269,24 +264,25 @@ def main():
         st.markdown("---")
 
         st.markdown("### 3D Structure Prediction")
-    
-    st.markdown('<div class="centered-button-container">', unsafe_allow_html=True)
-    if st.button("Generate 3D Structure", key="structure_btn"):
-        with st.spinner("Predicting 3D structure with ESMFold..."):
-            st.session_state.pdb_structure = get_protein_structure(
-                st.session_state.sequence)
-    st.markdown('</div>', unsafe_allow_html=True)
 
-    if st.session_state.pdb_structure:
-        st.markdown("#### Interactive 3D Visualization")
-            
-        vis_col1, vis_col2, vis_col3 = st.columns([1, 2, 1])
-        with vis_col2:
-            view = create_3d_visualization(st.session_state.pdb_structure)
-            showmol(view, height=600, width=800)
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+            if st.button("Generate 3D Structure", key="structure_btn"):
+                with st.spinner("Predicting 3D structure with ESMFold..."):
+                    st.session_state.pdb_structure = get_protein_structure(
+                        st.session_state.sequence)
 
-    elif st.session_state.pdb_structure is not None:
-        st.markdown(f'<p style="color: #ffffff; text-align: center;">Unable to generate 3D structure. Please try again.</p>', unsafe_allow_html=True)
+        if st.session_state.pdb_structure:
+            st.markdown("#### Interactive 3D Visualization")
+
+            vis_col1, vis_col2, vis_col3 = st.columns([1, 2, 1])
+            with vis_col2:
+                view = create_3d_visualization(st.session_state.pdb_structure)
+                showmol(view, height=600, width=800)
+
+        elif st.session_state.pdb_structure is not None:
+            st.markdown(
+                f'<p style="color: #ffffff; text-align: center;">Unable to generate 3D structure. Please try again.</p>', unsafe_allow_html=True)
 
     else:
 
@@ -304,6 +300,7 @@ def main():
         <p> Powered by Variational Autoencoders & ESMFold | Built with Streamlit</p>
     </div>
     """, unsafe_allow_html=True)
+
 
 if __name__ == "__main__":
     main()
