@@ -277,13 +277,13 @@ def main():
         st.markdown("---")
 
         st.markdown("### 3D Structure Prediction")
-
-        st.markdown('<div class="centered-button-container">', unsafe_allow_html=True)
-        if st.button("Generate 3D Structure", key="structure_btn"):
-            with st.spinner("Predicting 3D structure with ESMFold..."):
-                st.session_state.pdb_structure = get_protein_structure(
-                    st.session_state.sequence)
-        st.markdown('</div>', unsafe_allow_html=True)
+    
+    st.markdown('<div class="centered-button-container">', unsafe_allow_html=True)
+    if st.button("Generate 3D Structure", key="structure_btn"):
+        with st.spinner("Predicting 3D structure with ESMFold..."):
+            st.session_state.pdb_structure = get_protein_structure(
+                st.session_state.sequence)
+    st.markdown('</div>', unsafe_allow_html=True)
 
         if st.session_state.pdb_structure:
             st.markdown("#### Interactive 3D Visualization")
