@@ -205,7 +205,7 @@ def main():
 
     model = load_model()
 
-    col1, col2, col3 = st.columns([1, 2, 1])
+    col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
         if st.button("Generate New AMP Sequence", key="generate_btn"):
             with st.spinner("Generating novel antimicrobial peptide..."):
@@ -264,7 +264,7 @@ def main():
 
         st.markdown("### 3D Structure Prediction")
 
-        col1, col2, col3 = st.columns([1, 2, 1])
+        col1, col2, col3 = st.columns([1, 1, 1])
         with col2:
             if st.button("Generate 3D Structure", key="structure_btn"):
                 with st.spinner("Predicting 3D structure with ESMFold..."):
