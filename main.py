@@ -62,7 +62,7 @@ st.markdown("""
         font-size: 1.1rem;
         font-weight: 600;
         transition: all 0.3s ease;
-        width: 100%;
+        width: 500px;
         margin: 0 auto;
         display: block;
     }
