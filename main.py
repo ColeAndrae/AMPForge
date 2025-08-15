@@ -62,7 +62,7 @@ st.markdown("""
         font-size: 1.1rem;
         font-weight: 600;
         transition: all 0.3s ease;
-        width: 300px;
+        width: 400px;
         margin: 0 auto;
         display: block;
     }
@@ -183,7 +183,6 @@ def get_protein_structure(sequence):
         return None
 
 def create_3d_visualization(pdb_string):
-    """Create 3D molecular visualization"""
     view = py3Dmol.view(width=800, height=600)
     view.addModel(pdb_string, "pdb")
     view.setStyle({"cartoon": {"color": "spectrum"}})
