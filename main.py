@@ -260,7 +260,7 @@ def main():
         st.markdown("### 3D Structure Prediction")
 
         st.markdown(
-            '<div style="display:flex; justify-content:center; width:100%;">',
+            '<div style="display:flex; justify-content:center;">',
             unsafe_allow_html=True
         )
         if st.button("Generate 3D Structure", key="structure_btn"):
@@ -271,15 +271,11 @@ def main():
 
         if st.session_state.pdb_structure:
             st.markdown("#### Interactive 3D Visualization")
-
-            vis_col1, vis_col2, vis_col3 = st.columns([1, 2, 1])
-            with vis_col2:
-                view = create_3d_visualization(st.session_state.pdb_structure)
-                showmol(view, height=600, width=800)
+            view = create_3d_visualization(st.session_state.pdb_structure)
+            showmol(view, height=600, width=800)
 
         elif st.session_state.pdb_structure is not None:
-            st.markdown(
-                f'<p style="color: #ffffff; text-align: center;">Unable to generate 3D structure. Please try again.</p>', unsafe_allow_html=True)
+            st.error("Unable to generate 3D structure. Please try again.")
 
     else:
 
