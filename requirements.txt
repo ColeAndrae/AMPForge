@@ -4,3 +4,4 @@ requests
 py3Dmol
 stmol
 ipywidgets
+ipython_genutils
