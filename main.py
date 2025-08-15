@@ -62,7 +62,7 @@ st.markdown("""
         font-size: 1.1rem;
         font-weight: 600;
         transition: all 0.3s ease;
-        width: 300%;
+        width: 350%;
     }
     
     .stButton > button:hover {
@@ -83,7 +83,6 @@ AMINO_ACIDS_REV = {
 }
 
 # Creating VariationalAutoEncoder:
-
 
 class VariationalAutoEncoder(nn.Module):
     def __init__(self, input_dim=1050, h_dim=100, z_dim=10):
@@ -122,7 +121,6 @@ class VariationalAutoEncoder(nn.Module):
 
 # Loading Model:
 
-
 @st.cache_resource
 def load_model():
     """Load the pre-trained VAE model"""
@@ -142,7 +140,6 @@ def load_model():
         return None
 
 # Sequence Generation:
-
 
 def generate_sequence(model):
     """Generate a new AMP sequence using the VAE"""
@@ -165,7 +162,6 @@ def generate_sequence(model):
 
 # Sequence Visualization:
 
-
 def get_protein_structure(sequence):
     """Get PDB structure from ESMAtlas API"""
     try:
@@ -178,7 +174,6 @@ def get_protein_structure(sequence):
     except:
         return None
 
-
 def create_3d_visualization(pdb_string):
     """Create 3D molecular visualization"""
     view = py3Dmol.view(width=800, height=600)
@@ -189,7 +184,6 @@ def create_3d_visualization(pdb_string):
     return view
 
 # Main App
-
 
 def main():
 
@@ -300,7 +294,6 @@ def main():
         <p> Powered by Variational Autoencoders & ESMFold | Built with Streamlit</p>
     </div>
     """, unsafe_allow_html=True)
-
 
 if __name__ == "__main__":
     main()
