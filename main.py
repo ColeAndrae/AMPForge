@@ -71,6 +71,12 @@ st.markdown("""
         background: linear-gradient(45deg, #cccccc, #888888);
         color: #000000;
     }
+    
+    /* Center buttons */
+    div[data-testid="column"]:has(.stButton) {
+        display: flex;
+        justify-content: center;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -198,10 +204,8 @@ def main():
 
     model = load_model()
 
-    col1, col2, col3 = st.columns([1, 2, 1])
-
+    col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
-
         if st.button("Generate New AMP Sequence", key="generate_btn"):
             with st.spinner("Generating novel antimicrobial peptide..."):
                 st.session_state.sequence = generate_sequence(model)
@@ -259,15 +263,12 @@ def main():
 
         st.markdown("### 3D Structure Prediction")
 
-        st.markdown(
-            '<div style="display:flex; justify-content:center;">',
-            unsafe_allow_html=True
-        )
-        if st.button("Generate 3D Structure", key="structure_btn"):
-            with st.spinner("Predicting 3D structure with ESMFold..."):
-                st.session_state.pdb_structure = get_protein_structure(
-                    st.session_state.sequence)
-        st.markdown('</div>', unsafe_allow_html=True)
+        col1, col2, col3 = st.columns([1, 1, 1])
+        with col2:
+            if st.button("Generate 3D Structure", key="structure_btn"):
+                with st.spinner("Predicting 3D structure with ESMFold..."):
+                    st.session_state.pdb_structure = get_protein_structure(
+                        st.session_state.sequence)
 
         if st.session_state.pdb_structure:
             st.markdown("#### Interactive 3D Visualization")
