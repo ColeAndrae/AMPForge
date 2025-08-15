@@ -3,3 +3,4 @@ torch
 requests
 py3Dmol
 stmol
+ipywidgets
