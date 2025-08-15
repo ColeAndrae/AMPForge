@@ -259,7 +259,10 @@ def main():
 
         st.markdown("### 3D Structure Prediction")
 
-        st.markdown('<div style="display:flex; justify-content:center;">', unsafe_allow_html=True)
+        st.markdown(
+            '<div style="display:flex; justify-content:center; width:100%;">',
+            unsafe_allow_html=True
+        )
         if st.button("Generate 3D Structure", key="structure_btn"):
             with st.spinner("Predicting 3D structure with ESMFold..."):
                 st.session_state.pdb_structure = get_protein_structure(
